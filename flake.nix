@@ -72,6 +72,7 @@
           openssl
           mill
           coursier
+          metals
         ];
 
         shellHook = ''
