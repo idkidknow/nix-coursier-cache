@@ -62,6 +62,7 @@ object App extends IOApp {
           val artifacts = Files[IO]
             .walk(root)
             .evalFilter(path => Files[IO].isRegularFile(path))
+            .filter(path => !path.fileName.toString.startsWith("."))
           (root, artifacts)
         case (args, None, root) =>
           (root, Stream.emits(args))
