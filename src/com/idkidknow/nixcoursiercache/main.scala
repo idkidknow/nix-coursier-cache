@@ -102,7 +102,9 @@ def toArtifactInfoJson[F[_]: {Files, Processes, Concurrent}](
     root: Path,
     artifacts: Stream[F, Path],
 ): Stream[F, Byte] = artifacts
-  .evalMap(path => ArtifactInfo.fromPath[F](root, path))
+  .parEvalMapUnordered(Runtime.getRuntime.availableProcessors) { path =>
+    ArtifactInfo.fromPath[F](root, path)
+  }
   .map(info => writeToString(info))
   .flatMap { infoJson =>
     Stream(infoJson, ",\n")
