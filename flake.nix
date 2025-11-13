@@ -46,6 +46,7 @@
           runHook preBuild
 
           export SCALANATIVE_MODE=release-full
+          export SCALANATIVE_LTO=thin
           export COURSIER_CACHE=${coursier-cache}/share/coursier/v1
           mill nativeLink
 
