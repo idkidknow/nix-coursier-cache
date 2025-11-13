@@ -32,7 +32,7 @@
     {
       packages.x86_64-linux.default = pkgs.stdenv.mkDerivation {
         pname = "nix-coursier-cache";
-        version = "0-unstable-2025-11-12";
+        version = "0-unstable-2025-11-13";
         src = ./.;
 
         nativeBuildInputs = [
