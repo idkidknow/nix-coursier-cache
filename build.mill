@@ -30,8 +30,11 @@ object `package` extends ScalaNativeModule with ScalafixModule {
   def envLD: T[Option[String]] = Task.Input { sys.env.get("LD") }
 
   def nativeCompileOptions: T[Seq[String]] =
-    super.nativeCompileOptions() ++ (envLD() match {
-      case Some(ld) => Seq(s"-fuse-ld=$ld")
-      case None => Seq()
-    })
+    super.nativeCompileOptions() ++ Seq(
+      "-DGC_INITIAL_HEAP_SIZE=256m",
+      "-DGC_MAXIMUM_HEAP_SIZE=512m",
+    )
+
+  def nativeLinkingOptions: T[Seq[String]] =
+    super.nativeLinkingOptions() ++ envLD().map(ld => s"-fuse-ld=$ld").toSeq
 }
