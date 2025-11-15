@@ -16,7 +16,7 @@
             inherit (artifact) url hash;
           };
         in
-        pkgs.runCommand (lib.last (lib.splitString "/" artifact.path)) { } ''
+        pkgs.runCommandLocal (lib.last (lib.splitString "/" artifact.path)) { } ''
           target=$out/share/coursier/v1/${artifact.path}
           dir="$(dirname "$target")"
           mkdir -p $dir
