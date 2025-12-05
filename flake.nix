@@ -38,7 +38,6 @@
         nativeBuildInputs = [
           pkgs.which
           pkgs.llvmPackages_latest.clang
-          pkgs.openjdk25_headless
           pkgs.mill
         ];
 
